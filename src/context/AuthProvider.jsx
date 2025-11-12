@@ -4,12 +4,14 @@ import { AuthContext } from './AuthContext';
 
 const AuthContextProvider = ({children}) => {
     const [token, setToken] = useState();
+    const [isAuthLoaded, setIsAuthLoaded] = useState(false);
 
     useEffect(() => {
         const stored = localStorage.getItem('token');
         if (stored) {
             setToken(stored);
         }
+        setIsAuthLoaded(true);
     },[]);
 
     const login = (newToken) => {
@@ -22,13 +24,14 @@ const AuthContextProvider = ({children}) => {
         setToken()
     };
 
-    const isLoggedIn = !!token;
+    const isLoggedIn = token ? true : false;
 
     const contextValue = {
         token,
         isLoggedIn,
         login,
-        logout
+        logout,
+        isAuthLoaded
     };
 
     return (

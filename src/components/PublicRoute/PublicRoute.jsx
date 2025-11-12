@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navigate } from 'react-router-dom';
-import useAuthContextProvider from '../../context/AuthProvider'
+import {AuthContext} from '../../context/AuthContext';
 
 const PublicRoute = ({ children }) => {
-    const { isLoggedIn } = useAuthContextProvider();
+    const { isLoggedIn, isAuthLoaded } = useContext(AuthContext);
+
+    if (!isAuthLoaded) {
+        return <div>Loading...</div>;
+    }
 
     if (isLoggedIn) {
         return <Navigate to="/add" replace />;

@@ -1,30 +1,32 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext  } from 'react';
 import './Orders.css';
 import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from '../../assets/assets';
+import { AuthContext } from '../../context/AuthContext';
 
 const Orders = ({url}) => {
 
   const [orders, setOrders] = useState([]);
+  const { token } = useContext(AuthContext);
 
   const fetchAllOrders = useCallback(async () => {
     try {
-      const response = await axios.get(url + "/api/order/listorders");
+      const response = await axios.get(url + "/api/order/listorders", {headers: {Authorization: `Bearer ${token}`}});
       if (response.data.success) {
         setOrders(response.data.data);
       }
     } catch (error) {
       toast.error(error);
     } 
-  }, [url]);
+  }, [url, token]);
 
   const statusHandler = async (event, orderId) => {
     try {
       const response = await axios.post(url + "/api/order/update", {
         orderId,
         status: event.target.value
-      });
+      }, {headers: {Authorization: `Bearer ${token}`}});
       if (response.data.success) {
         await fetchAllOrders();
         toast.success(response.data.message);
