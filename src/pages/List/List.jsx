@@ -3,12 +3,15 @@ import './List.css'
 import axios from "axios"
 import { toast } from "react-toastify";
 import DeletePopup from '../../components/DeletePopup/DeletePopup';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const List = ({url}) => {
 
   const [list, setList] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedFoodId, setSelectedFoodId] = useState(null);
+  const { token } = useContext(AuthContext);
 
   const fetchList = useCallback(async () => {
     const response = await axios.get(`${url}/api/food/list`);
@@ -34,7 +37,7 @@ const List = ({url}) => {
   const deleteFood = async () => {
     if (!selectedFoodId) return toast.error("error");
 
-    const response = await axios.delete(`${url}/api/food/delete/${selectedFoodId}`);
+    const response = await axios.delete(`${url}/api/food/delete/${selectedFoodId}`, {headers: {Authorization: `Bearer ${token}`}});
     await fetchList();
 
     if (response.data.success){

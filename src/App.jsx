@@ -10,11 +10,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login/Login'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import {AuthContext} from './context/AuthContext';
+import PublicRoute from './components/PublicRoute/PublicRoute'
 
 const App = () => {
 
   const url = "http://localhost:4000";
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn, isAuthLoaded } = useContext(AuthContext)
+
+  if (!isAuthLoaded) {
+        return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -27,7 +32,7 @@ const App = () => {
           <Route path="/add" element={<ProtectedRoute><Add url={url}/></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><List url={url}/></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><Orders url={url}/></ProtectedRoute>} />
-          <Route path="/" element={<Login url={url}/>} />
+          <Route path="/" element={<PublicRoute><Login url={url}/></PublicRoute>} />
         </Routes>
       </div>
       

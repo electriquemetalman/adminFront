@@ -3,6 +3,8 @@ import './Add.css'
 import { assets } from '../../assets/assets'
 import axios from "axios"
 import { toast } from "react-toastify";
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const Add = ({url}) => {
     const [image,setImage] = useState(false);
@@ -12,6 +14,7 @@ const Add = ({url}) => {
       price:"",
       category:"Salade"
     })
+    const { token } = useContext(AuthContext);
 
     const onChangeHandler = (event) => {
         const name = event.target.name;
@@ -27,7 +30,7 @@ const Add = ({url}) => {
       formData.append("price", Number(data.price))
       formData.append("category", data.category)
       formData.append("image", image)
-      const response = await axios.post(`${url}/api/food/add`, formData);
+      const response = await axios.post(`${url}/api/food/add`, formData, {headers: {Authorization: `Bearer ${token}`}});
       if (response.data.success){
         setData({
             name:"",
