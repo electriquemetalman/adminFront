@@ -1,0 +1,46 @@
+.update-info-form{
+    display: flex;
+    justify-content: flex-start; 
+    align-items: flex-start;     
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.update-user-group{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eaeaea;
+    border-radius: 4px;
+}
+.update-user-group label{
+    font-size: 1rem;
+}
+.update-user-group input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 2px;
+}
+
+.update-form .update-btn{
+    margin-top: 20px;
+    border: none;
+    background-color: tomato;
+    color: white;
+    height: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.update-form .update-btn:hover{
+    background-color: #070707;
+}
+
+@media (max-width:750px){
+    .cart-update-info-form{
+        flex-direction: column-reverse;
+    }
+}
