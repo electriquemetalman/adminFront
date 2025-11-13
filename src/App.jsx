@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import Add from './pages/Add/Add'
 import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
+import Profile from './pages/Profile/Profile'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login/Login'
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/add" element={<ProtectedRoute><Add url={url}/></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><List url={url}/></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><Orders url={url}/></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile url={url}/></ProtectedRoute>} />
           <Route path="/" element={<PublicRoute><Login url={url}/></PublicRoute>} />
         </Routes>
       </div>
