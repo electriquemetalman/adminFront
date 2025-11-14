@@ -6,6 +6,7 @@ import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
+import defaultAdminPro from './defaultAdminPro.jpg'
 
 export const assets ={
     logo,
@@ -15,7 +16,8 @@ export const assets ={
     upload_area,
     parcel_icon,
     bag_icon ,
-    logout_icon
+    logout_icon,
+    defaultAdminPro
 }
 
 export const url = 'http://localhost:4000'
