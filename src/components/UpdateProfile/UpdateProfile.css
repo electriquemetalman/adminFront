@@ -43,6 +43,10 @@
     gap: 10px;
 }
 
+.update-profile-pic-upload img{
+    width: 120px;
+}
+
 .update-profile-form button{
     border: none;
     background-color: tomato;
