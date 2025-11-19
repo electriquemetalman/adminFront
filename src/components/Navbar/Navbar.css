@@ -47,3 +47,65 @@
 .nav-profile-dropdown img{
     width: 20px;
 }
+
+.navbar-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+/* --- Notification Icon --- */
+
+.notif-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-icon {
+  width: 30px;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+}
+
+/* --- Dropdown Notifications --- */
+
+.notif-dropdown {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  width: 220px;
+  background: #48484a;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid tomato;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.notif-item {
+  background: #333;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  border-left: 3px solid tomato;
+}
+
+.notif-item:hover {
+  background: #3e3e3e;
+}
+
+.no-notif {
+  text-align: center;
+  opacity: 0.7;
+}
