@@ -21,50 +21,58 @@ const Navbar = () => {
   };
 
   return (
-    <div className='navbar'>
-        <img className='logo' src={assets.logo} alt='' />
+    <div className="navbar">
+      
+      
+      <img className="logo" src={assets.logo} alt="Logo" />
 
-        <div className='navbar-right'>
-          <div className='notif-container'>
-            <img
-              src={assets.notification_icon}
-              alt='notifications'
-              className='notification-icon'
-              onClick={toggleNotifications}
-            />
+     
+      <div className="navbar-right">
 
-            {unread > 0 && <span className='notif-badge'>{unread}</span>}
+        <div className="notif-container">
+          <img
+            src={assets.notification_icon}
+            alt="notifications"
+            className="notification-icon"
+            onClick={toggleNotifications}
+          />
 
-            {showNotifications && (
-              <div className='notif-dropdown'>
-                {notifications.length === 0 ? (
-                  <p className='no-notif'>No notification</p>
-                ) : (
-                  notifications.map((notif, index) => (
-                    <div key={index} className='notif-item'>
-                      <p>{notif.message}</p>
-                    </div>
-                    ))
-                )}
-              </div>
-            )}
-          </div>
+          {unread > 0 && <span className="notif-badge">{unread}</span>}
+
+          {showNotifications && (
+            <div className="notif-dropdown">
+              {notifications.length === 0 ? (
+                <p className="no-notif">No notification</p>
+              ) : (
+                notifications.map((notif, index) => (
+                  <div key={index} className="notif-item">
+                    <p>{notif.message}</p>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
 
-        <div className='profile'>
-          <img src={assets.profile_icon} alt='' />
-          <ul className='nav-profile-dropdown'>
+        <div className="profile">
+          <img src={assets.profile_icon} alt="profile" className="profile-icon" />
+
+          <ul className="nav-profile-dropdown">
             <li onClick={() => navigate('/profile')}>
-              <img src={assets.bag_icon} alt=''/>
+              <img src={assets.bag_icon} alt="" />
               <p>Profile</p>
             </li>
+
             <hr />
+
             <li onClick={logout}>
-              <img src={assets.logout_icon} alt=''/>
+              <img src={assets.logout_icon} alt="" />
               <p>Logout</p>
             </li>
           </ul>
         </div>
+
+      </div>
     </div>
   )
 }

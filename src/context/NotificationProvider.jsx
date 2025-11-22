@@ -16,7 +16,7 @@ const NotificationProvider = ({ children }) => {
         socketRef.current = io("http://localhost:4000");
 
         socketRef.current.on("connect", () => {
-            console.log("Connected to notification server " + notifications);
+            console.log("Connected to notification server ");
 
         });
         
