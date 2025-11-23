@@ -1,22 +1,33 @@
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { NotificationContext } from './NotificationContext';
+import { jwtDecode } from "jwt-decode";
 
 const NotificationProvider = ({ children }) => {
     const [notifications, setNotifications] = useState([]);
     const [unread, setUnread] = useState(0);
+
 
     const socketRef = useRef();
     const playSound = () => {
         const audio = new Audio("/sounds/notif.mp3");
         audio.play();
     };
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
+
+        if (!token) return;
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.id || decodedToken._id;
+        
+
         socketRef.current = io("http://localhost:4000");
 
         socketRef.current.on("connect", () => {
             console.log("Connected to notification server ");
+
+            socketRef.current.emit("joinRoom", userId);
 
         });
         
@@ -31,7 +42,7 @@ const NotificationProvider = ({ children }) => {
         return () => {
             socketRef.current.disconnect();
         }
-    }, [notifications]);
+    }, [token]);
     
     const markAllAsRead = () => {
         setUnread(0);
