@@ -25,7 +25,7 @@ const App = () => {
   return (
     <div>
       <ToastContainer/>
-      {isLoggedIn && <Navbar />}
+      {isLoggedIn && <Navbar url={url}/>}
       {isLoggedIn && <hr/>}
       <div className='app-content'>
         {isLoggedIn && <Sidebar/>}

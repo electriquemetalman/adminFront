@@ -1,17 +1,19 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState, useCallback} from 'react'
 import './Navbar.css'
 import {assets} from '../../assets/assets.js'
 import { AuthContext } from '../../context/AuthContext';
 import { NotificationContext } from '../../context/NotificationContext.jsx';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
-const Navbar = () => {
+const Navbar = ({url}) => {
 
-  const { logout } = useContext(AuthContext);
+  const { logout, token } = useContext(AuthContext);
   const { notifications, unread, markAllAsRead } = useContext(NotificationContext);
   const navigate = useNavigate();
 
-  const [showNotifications, setShowNotifications] = React.useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [user, setUser] = useState(null);
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -19,6 +21,21 @@ const Navbar = () => {
       markAllAsRead();
     }
   };
+
+  const fetchUser = useCallback(async () => {
+    try {
+      const response = await axios.get(url + "/api/user/getUser", {headers: {Authorization: `Bearer ${token}`}});
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+    }
+  }, [url, token]);
+
+  React.useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <div className="navbar">
@@ -55,7 +72,7 @@ const Navbar = () => {
         </div>
 
         <div className="profile">
-          <img src={assets.profile_icon} alt="profile" className="profile-icon" />
+          <img src={user && user.profile ? `${url}/profiles/` + user.profile : assets.profile_icon} alt="profile" className="profile-icon" />
 
           <ul className="nav-profile-dropdown">
             <li onClick={() => navigate('/profile')}>
